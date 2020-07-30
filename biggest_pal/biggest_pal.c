@@ -41,7 +41,7 @@ void	biggest_pal(char *s)
 		size = length - index;
 		while (size > 0 && size >= save_size)
 		{
-			if (is_pal(&s[index], size))
+			if (is_pal(s + index, size))
 			{
 				save_index = index;
 				save_size = size;
