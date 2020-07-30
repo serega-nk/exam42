@@ -10,7 +10,7 @@ size_t	ft_strlen(char *s)
 	return (len);
 }
 
-int		is_pol(char *s, size_t len)
+int		is_pal(char *s, size_t len)
 {
 	size_t	index;
 
@@ -41,7 +41,7 @@ void	biggest_pal(char *s)
 		size = length - index;
 		while (size > 0 && size >= save_size)
 		{
-			if (is_pol(&s[index], size))
+			if (is_pal(&s[index], size))
 			{
 				save_index = index;
 				save_size = size;
