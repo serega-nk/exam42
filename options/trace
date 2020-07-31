@@ -1,0 +1,26 @@
+$> ./a.out
+options: abcdefghijklmnopqrstuvwxyz
+
+$> ./a.out -abcz -w -ijfek -lildali -pirmakn -apizobouzaguoca
+00000010 01010010 11111111 01111111
+
+$> ./a.out -z bonjour -cd -e
+00000010 00000000 00000000 00011100
+
+$> ./a.out -a --a
+Invalid Option
+
+$> ./a.out -ab% -zd
+Invalid Option
+
+$> ./a.out -abcdefgijklmnopqrstuvwxyz
+00000011 11111111 11111111 01111111
+
+$> ./a.out Bonjour
+00000000 00000000 00000000 00000000
+
+$> ./a.out -
+00000000 00000000 00000000 00000000
+
+$> ./a.out -h%
+options: abcdefghijklmnopqrstuvwxyz
