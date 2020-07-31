@@ -1,33 +1,29 @@
 #include <stdlib.h>
 
-int		ft_abs(int value)
-{
-	return (value < 0 ? -value : value);
-}
-
 char	*ft_itoa_base(int value, int base)
 {
-	char	*hex;
-	int		sign;
-	int		size;
-	int 	temp;
-	char	*res;
+	int				sign;
+	int				size;
+	unsigned int	n;
+	char			*hex;
+	char			*res;
 
 	if (base < 2 || base > 16)
 		return (NULL);
-	hex = "0123456789ABCDEF";
 	sign = (base == 10 && value < 0);
-	size = sign + 2;
-	temp = value;
-	while (temp /= base)
+	size = 2 + sign;
+	n = sign ? (unsigned int)-value : (unsigned int)value;
+	while (n /= base)
 		size++;
+	hex = "0123456789ABCDEF";
 	res = (char *)malloc(size * sizeof(char));
 	if (res)
 	{
+		n = sign ? (unsigned int)-value : (unsigned int)value;
 		res[--size] = '\0';
-		res[--size] = hex[ft_abs(value % base)];
-		while (value /= base)
-			res[--size] = hex[ft_abs(value % base)];
+		res[--size] = hex[n % base];	
+		while (n /= base)
+			res[--size] = hex[n % base];
 		if (sign)
 			res[--size] = '-';
 	}

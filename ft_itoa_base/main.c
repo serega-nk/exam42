@@ -1,23 +1,28 @@
 #include <stdio.h>
 
-char		*ft_itoa_base(int value, int base);
+char	*ft_itoa_base(int value, int base);
 
-int			main(void)
+void	test(int value)
 {
-	printf("|%s|\n", ft_itoa_base(0, -10));
+	printf("1 - 16 |%x|\n", value);
+	printf("2 - 16 |%s|\n", ft_itoa_base(value, 16));
+	printf("1 - 10 |%d|\n", value);
+	printf("2 - 10 |%s|\n", ft_itoa_base(value, 10));
+	printf("1 -  8 |%o|\n", value);
+	printf("2 -  8 |%s|\n", ft_itoa_base(value, 8));
+	printf("2 -  2 |%s|\n", ft_itoa_base(value, 2));
+	printf("============\n");
+}
 
-	printf("|%s|\n", ft_itoa_base(100, 16));
-	printf("|%s|\n", ft_itoa_base(100, 10));
-	printf("|%s|\n", ft_itoa_base(-100, 16));
-	printf("|%s|\n", ft_itoa_base(0, 10));
-	printf("|%s|\n", ft_itoa_base(0, 12));
-
-	printf("|%s|\n", ft_itoa_base(-2147483648, 2));
-	printf("|%s|\n", ft_itoa_base(2147483647, 2));
-	printf("|%s|\n", ft_itoa_base(-2147483648, 8));
-	printf("|%s|\n", ft_itoa_base(2147483647, 8));
-	printf("|%s|\n", ft_itoa_base(-2147483648, 16));
-	printf("|%s|\n", ft_itoa_base(2147483647, 16));
+int		main(void)
+{
+	test(-1);
+	test(1);
+	test(0);
+	test(-2147483648);
+	test(2147483647);
+	test(888888);
+	test(0xCCCCCFF);
 
 	return (0);
 }
