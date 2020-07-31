@@ -1,17 +1,23 @@
-#include <unistd.h>
+#include "unistd.h"
 
-int		options(char *str, int *aopts)
+int		options(char *str, int *aopt)
 {
 	if (*str != '-')
-		return (0);
+		return (1);
 	str++;
-	if (!*str)
-		return (0);
 	while (*str)
 	{
-		if (*str < 'a' || *str > 'z')
+		if (*str == 'h')
+		{
+			write(1, "options: abcdefghijklmnopqrstuvwxyz\n", 36);
 			return (0);
-		*aopts |= 1 << (*str - 'a');
+		}
+		if (*str < 'a' || *str > 'z')
+		{
+			write(1, "Invalid Option\n", 15);
+			return (0);
+		}
+		*aopt = *aopt | (1 << (*str - 'a'));
 		str++;
 	}
 	return (1);
@@ -19,37 +25,29 @@ int		options(char *str, int *aopts)
 
 int		main(int argc, char *argv[])
 {
-	int		opts;
-	int		i;
+	int	res;
+	int	index;
 
-	opts = 0;
-	i = 1;
-	while (i < argc)
-	{
-		if (!options(argv[i], &opts))
-		{
-			write(1, "Invalid Option\n", 15);
-			return (0);
-		}
-		i++;
-	}
-	if (opts == 0 || opts & (1 << ('h' - 'a')))
+	if (argc == 1)
 	{
 		write(1, "options: abcdefghijklmnopqrstuvwxyz\n", 36);
+		return (0);
 	}
-	else
+	res = 0;
+	index = 1;
+	while (index < argc)
 	{
-		i = 32;
-		while (i-- > 0)
-		{
-			if (opts & (1 << i))
-				write(1, "1", 1);
-			else
-				write(1, "0", 1);
-			if (i > 0 && i % 8 == 0)
-				write(1, " ", 1);
-		}
-		write(1, "\n", 1);
+		if (!options(argv[index], &res))
+			return (0);
+		index++;
 	}
-	return (0);
+	index = 32;
+	while (index > 0)
+	{
+		index--;
+		write(1, res & (1 << index) ? "1" : "0", 1);
+		if (index && index % 8 == 0)
+			write(1, " ", 1);
+	}
+	write(1, "\n", 1);
 }
