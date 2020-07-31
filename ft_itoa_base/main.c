@@ -11,6 +11,7 @@ void	test(int value)
 	printf("1 -  8 |%o|\n", value);
 	printf("2 -  8 |%s|\n", ft_itoa_base(value, 8));
 	printf("2 -  2 |%s|\n", ft_itoa_base(value, 2));
+	printf("2 -  0 |%s|\n", ft_itoa_base(value, 0));
 	printf("============\n");
 }
 
